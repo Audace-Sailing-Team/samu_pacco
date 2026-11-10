@@ -30,6 +30,7 @@
 #define BNO055_INIT_RETRY_DELAY_MS  500
 #define BNO055_CHIP_ID_VALUE        0xA0    // Valore atteso nel registro CHIP_ID (0x00)
 #define BNO055_EULER_LSB_PER_DEG    16.0    // Scala Bosch: 1 LSB = 1/16 di grado
+#define BNO055_ACCEL_LSB_PER_MSQ    100.0   // Scala Bosch: 1 LSB = 0.01 m/s^2 (100 LSB = 1 m/s^2)
 
 #define FCS_LOOP_PERIOD_MS          10      // Periodo loop di acquisizione (10 ms = 100 Hz)
 
@@ -213,8 +214,12 @@ static esp_err_t bno055_setup(void) {
         return ESP_ERR_INVALID_RESPONSE;
     }
 
-    // Imposta alimentazione normale e fusione sensori a 9 gradi di liberta' (NDOF)
+    // Imposta alimentazione normale, unita' accelerometro in m/s^2 e fusione a 9 DOF (NDOF)
+    u8 accel_unit = 0;
     if (bno055_set_power_mode(BNO055_POWER_MODE_NORMAL) != BNO055_SUCCESS ||
+        bno055_get_accel_unit(&accel_unit) != BNO055_SUCCESS ||
+        (accel_unit != BNO055_ACCEL_UNIT_MSQ &&
+         bno055_set_accel_unit(BNO055_ACCEL_UNIT_MSQ) != BNO055_SUCCESS) ||
         bno055_set_operation_mode(BNO055_OPERATION_MODE_NDOF) != BNO055_SUCCESS) {
         ESP_LOGE(TAG, "Configurazione modalita' BNO055 fallita");
         return ESP_FAIL;
@@ -240,19 +245,27 @@ void app_main(void) {
         return;
     }
 
-    // Loop deterministico a 100 Hz per l'acquisizione degli angoli di Eulero
+    // Loop deterministico a 100 Hz per l'acquisizione di angoli di Eulero e accelerazioni (X, Y, Z)
     struct bno055_euler_t euler_data;
+    struct bno055_accel_t accel_data;
     TickType_t last_wake_time = xTaskGetTickCount();
     const TickType_t period = pdMS_TO_TICKS(FCS_LOOP_PERIOD_MS);
 
     while (1) {
-        if (bno055_read_euler_hrp(&euler_data) == BNO055_SUCCESS) {
+        if (bno055_read_euler_hrp(&euler_data) == BNO055_SUCCESS &&
+            bno055_read_accel_xyz(&accel_data) == BNO055_SUCCESS) {
             double heading = (double)euler_data.h / BNO055_EULER_LSB_PER_DEG;
             double roll    = (double)euler_data.r / BNO055_EULER_LSB_PER_DEG;
             double pitch   = (double)euler_data.p / BNO055_EULER_LSB_PER_DEG;
 
-            ESP_LOGI(TAG, "Euler -> Yaw/Heading: %6.2f° | Roll: %6.2f° | Pitch: %6.2f°",
-                     heading, roll, pitch);
+            double accel_x = (double)accel_data.x / BNO055_ACCEL_LSB_PER_MSQ;
+            double accel_y = (double)accel_data.y / BNO055_ACCEL_LSB_PER_MSQ;
+            double accel_z = (double)accel_data.z / BNO055_ACCEL_LSB_PER_MSQ;
+
+            ESP_LOGI(TAG,
+                     "Euler -> Yaw/Heading: %6.2f° | Roll: %6.2f° | Pitch: %6.2f° | "
+                     "Accel (m/s²) -> X: %6.2f | Y: %6.2f | Z: %6.2f",
+                     heading, roll, pitch, accel_x, accel_y, accel_z);
         } else {
             ESP_LOGW(TAG, "Lettura BNO055 fallita (I2C timeout o NACK)");
         }
