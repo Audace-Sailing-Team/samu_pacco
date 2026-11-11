@@ -1,0 +1,193 @@
+ *  Esecuzione dell'attività: platformio device monitor 
+
+
+Please build project in debug configuration to get more details about an exception.
+See https://docs.platformio.org/page/projectconf/build_configurations.html
+
+
+--- Terminal on /dev/ttyUSB0 | 115200 8-N-1
+--- Available filters and text transformations: debug, default, direct, esp32_exception_decoder, hexlify, log2file, nocontrol, printable, send_on_enter, time
+--- More details at https://bit.ly/pio-monitor-filters
+--- Quit: Ctrl+C | Menu: Ctrl+T | Help: Ctrl+T followed by Ctrl+H
+I (10585) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (10585) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (10585) ULTRASONIC: TRIG: medio=5169 us | min=4999 us | max=29141 us | frequenza=193.5 Hz
+I (10595) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (10595) ULTRASONIC: Durata ECHO: min=1946 us | max=1947 us
+I (10605) ULTRASONIC: --------------------------------
+E (11335) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:
+E (11335) task_wdt:  - IDLE1 (CPU 1)
+E (11335) task_wdt: Tasks currently running:
+E (11335) task_wdt: CPU 0: IDLE0
+E (11335) task_wdt: CPU 1: ultrasonic_task
+E (11335) task_wdt: Print CPU 1 backtrace
+
+
+Backtrace: 0x400814BE:0x3FFB1680 0x40083201:0x3FFB16A0 0x4008220F:0x3FFB5BC0 0x400D1101:0x3FFB5BE0 0x400D11F5:0x3FFB5C00 0x40085E79:0x3FFB5C30
+  #0  0x400814BE in esp_crosscore_isr at /home/rosso/.platformio/packages/framework-espidf/components/esp_system/crosscore_int.c:74
+  #1  0x3FFB1680 in _xt_exception_table at ??:?
+  #2  0x40083201 in _xt_lowint1 at /home/rosso/.platformio/packages/framework-espidf/components/xtensa/xtensa_vectors.S:1240
+  #3  0x3FFB16A0 in _xt_exception_table at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:67
+  #4  0x4008220F in esp_timer_impl_get_time at /home/rosso/.platformio/packages/framework-espidf/components/esp_timer/src/esp_timer_impl_lac.c:128
+  #5  0x400D1101 in read_echo at src/main.c:443
+  #6  0x400D11F5 in ultrasonic_task at src/main.c:550
+  #7  0x40085E79 in vPortTaskWrapper at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+
+I (11625) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (11625) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=3
+I (11625) ULTRASONIC: TRIG: medio=5245 us | min=4999 us | max=29663 us | frequenza=190.7 Hz
+I (11635) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (11645) ULTRASONIC: Durata ECHO: min=1945 us | max=1948 us
+I (11645) ULTRASONIC: --------------------------------
+I (12655) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (12655) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (12655) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29664 us | frequenza=193.4 Hz
+I (12665) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (12675) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (12675) ULTRASONIC: --------------------------------
+I (13685) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (13685) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (13685) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (13695) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (13695) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (13705) ULTRASONIC: --------------------------------
+I (14715) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (14715) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (14715) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29664 us | frequenza=193.4 Hz
+I (14725) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (14725) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (14735) ULTRASONIC: --------------------------------
+I (15745) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (15745) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (15745) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (15755) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (15755) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (15765) ULTRASONIC: --------------------------------
+E (16335) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:
+E (16335) task_wdt:  - IDLE1 (CPU 1)
+E (16335) task_wdt: Tasks currently running:
+E (16335) task_wdt: CPU 0: IDLE0
+E (16335) task_wdt: CPU 1: ultrasonic_task
+E (16335) task_wdt: Print CPU 1 backtrace
+
+
+Backtrace: 0x400814BE:0x3FFB1680 0x40083201:0x3FFB16A0 0x400821E7:0x3FFB5BA0 0x4008220F:0x3FFB5BC0 0x400D1101:0x3FFB5BE0 0x400D11F5:0x3FFB5C00 0x40085E79:0x3FFB5C30
+  #0  0x400814BE in esp_crosscore_isr at /home/rosso/.platformio/packages/framework-espidf/components/esp_system/crosscore_int.c:74
+  #1  0x3FFB1680 in _xt_exception_table at ??:?
+  #2  0x40083201 in _xt_lowint1 at /home/rosso/.platformio/packages/framework-espidf/components/xtensa/xtensa_vectors.S:1240
+  #3  0x3FFB16A0 in _xt_exception_table at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:67
+  #4  0x400821E7 in esp_timer_impl_get_counter_reg at /home/rosso/.platformio/packages/framework-espidf/components/esp_timer/src/esp_timer_impl_lac.c:105
+  #5  0x4008220F in esp_timer_impl_get_time at /home/rosso/.platformio/packages/framework-espidf/components/esp_timer/src/esp_timer_impl_lac.c:128
+  #6  0x400D1101 in read_echo at src/main.c:443
+  #7  0x400D11F5 in ultrasonic_task at src/main.c:550
+  #8  0x40085E79 in vPortTaskWrapper at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+
+I (16785) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (16785) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=3
+I (16785) ULTRASONIC: TRIG: medio=5252 us | min=4999 us | max=29664 us | frequenza=190.4 Hz
+I (16795) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (16805) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (16805) ULTRASONIC: --------------------------------
+I (17815) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (17815) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (17815) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (17825) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (17835) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (17835) ULTRASONIC: --------------------------------
+I (18845) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (18845) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (18845) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (18855) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (18865) ULTRASONIC: Durata ECHO: min=1946 us | max=1947 us
+I (18865) ULTRASONIC: --------------------------------
+I (19875) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (19875) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (19875) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (19885) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (19895) ULTRASONIC: Durata ECHO: min=1945 us | max=1947 us
+I (19895) ULTRASONIC: --------------------------------
+I (20905) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (20905) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (20905) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (20915) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (20915) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (20925) ULTRASONIC: --------------------------------
+E (21335) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:
+E (21335) task_wdt:  - IDLE1 (CPU 1)
+E (21335) task_wdt: Tasks currently running:
+E (21335) task_wdt: CPU 0: IDLE0
+E (21335) task_wdt: CPU 1: ultrasonic_task
+E (21335) task_wdt: Print CPU 1 backtrace
+
+
+Backtrace: 0x400814BE:0x3FFB1680 0x40083201:0x3FFB16A0 0x400821F4:0x3FFB5BA0 0x4008220F:0x3FFB5BC0 0x400D1101:0x3FFB5BE0 0x400D11F5:0x3FFB5C00 0x40085E79:0x3FFB5C30
+  #0  0x400814BE in esp_crosscore_isr at /home/rosso/.platformio/packages/framework-espidf/components/esp_system/crosscore_int.c:74
+  #1  0x3FFB1680 in _xt_exception_table at ??:?
+  #2  0x40083201 in _xt_lowint1 at /home/rosso/.platformio/packages/framework-espidf/components/xtensa/xtensa_vectors.S:1240
+  #3  0x3FFB16A0 in _xt_exception_table at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:67
+  #4  0x400821F4 in esp_timer_impl_get_counter_reg at /home/rosso/.platformio/packages/framework-espidf/components/esp_timer/src/esp_timer_impl_lac.c:115
+  #5  0x4008220F in esp_timer_impl_get_time at /home/rosso/.platformio/packages/framework-espidf/components/esp_timer/src/esp_timer_impl_lac.c:128
+  #6  0x400D1101 in read_echo at src/main.c:443
+  #7  0x400D11F5 in ultrasonic_task at src/main.c:550
+  #8  0x40085E79 in vPortTaskWrapper at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+
+I (21955) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (21955) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=3
+I (21955) ULTRASONIC: TRIG: medio=5267 us | min=4999 us | max=29663 us | frequenza=189.9 Hz
+I (21965) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (21965) ULTRASONIC: Durata ECHO: min=1945 us | max=1948 us
+I (21975) ULTRASONIC: --------------------------------
+I (22985) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (22985) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (22985) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (22995) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (22995) ULTRASONIC: Durata ECHO: min=1945 us | max=1948 us
+I (23005) ULTRASONIC: --------------------------------
+I (24015) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (24015) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (24015) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (24025) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (24025) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (24035) ULTRASONIC: --------------------------------
+I (25045) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (25045) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (25045) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (25055) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (25055) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (25065) ULTRASONIC: --------------------------------
+I (26065) ULTRASONIC: Tentativi=200 | validi=49 (24.5%) | ECHO=25.0%
+I (26065) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=0 | Periodi saltati=2
+I (26075) ULTRASONIC: TRIG: medio=5171 us | min=4999 us | max=29663 us | frequenza=193.4 Hz
+I (26075) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (26085) ULTRASONIC: Durata ECHO: min=1946 us | max=1948 us
+I (26085) ULTRASONIC: --------------------------------
+E (26335) task_wdt: Task watchdog got triggered. The following tasks/users did not reset the watchdog in time:
+E (26335) task_wdt:  - IDLE1 (CPU 1)
+E (26335) task_wdt: Tasks currently running:
+E (26335) task_wdt: CPU 0: IDLE0
+E (26335) task_wdt: CPU 1: ultrasonic_task
+E (26335) task_wdt: Print CPU 1 backtrace
+
+
+Backtrace: 0x400814BE:0x3FFB1680 0x40083201:0x3FFB16A0 0x400D1FF0:0x3FFB5BB0 0x400D112F:0x3FFB5BE0 0x400D11F5:0x3FFB5C00 0x40085E79:0x3FFB5C30
+  #0  0x400814BE in esp_crosscore_isr at /home/rosso/.platformio/packages/framework-espidf/components/esp_system/crosscore_int.c:74
+  #1  0x3FFB1680 in _xt_exception_table at ??:?
+  #2  0x40083201 in _xt_lowint1 at /home/rosso/.platformio/packages/framework-espidf/components/xtensa/xtensa_vectors.S:1240
+  #3  0x3FFB16A0 in _xt_exception_table at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:67
+  #4  0x400D1FF0 in gpio_ll_get_level at /home/rosso/.platformio/packages/framework-espidf/components/hal/esp32/include/hal/gpio_ll.h:536
+      (inlined by) gpio_get_level at /home/rosso/.platformio/packages/framework-espidf/components/esp_driver_gpio/src/gpio.c:245
+  #5  0x400D112F in read_echo at src/main.c:450
+  #6  0x400D11F5 in ultrasonic_task at src/main.c:550
+  #7  0x40085E79 in vPortTaskWrapper at /home/rosso/.platformio/packages/framework-espidf/components/freertos/FreeRTOS-Kernel/portable/xtensa/port.c:139
+
+
+I (27115) ULTRASONIC: Tentativi=200 | validi=48 (24.0%) | ECHO=25.0%
+I (27115) ULTRASONIC: NoEcho=150 | Stuck=1 | FuoriRange=1 | Periodi saltati=3
+I (27115) ULTRASONIC: TRIG: medio=5258 us | min=4999 us | max=29663 us | frequenza=190.2 Hz
+I (27125) ULTRASONIC: Ultimo ECHO=0 us | distanza=0 mm
+I (27135) ULTRASONIC: Durata ECHO: min=1945 us | max=14893 us
+I (27135) ULTRASONIC: --------------------------------
+ *  Terminale verrà riutilizzato dalle attività, premere un tasto qualsiasi per chiuderlo. 
