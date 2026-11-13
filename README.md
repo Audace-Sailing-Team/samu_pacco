@@ -1,3 +1,3 @@
 # samu_paccò
 
-Repo Gruppo Software AUdace Sailing Team 2026
+Repo Gruppo Software Audace Sailing Team 2026
